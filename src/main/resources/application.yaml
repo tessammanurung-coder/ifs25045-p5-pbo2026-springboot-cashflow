@@ -14,7 +14,7 @@ spring:
   datasource:
     url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:pbo2026_cashflow}
     username: ${DB_USERNAME:postgres}
-    password: ${DB_PASSWORD:}
+    password: ${DB_PASSWORD:tessa}
     driver-class-name: org.postgresql.Driver
   sql:
     init:
@@ -29,8 +29,8 @@ vaadin:
 
 app:
   root:
-    username: ${ROOT_USERNAME:root}
-    password: ${ROOT_PASSWORD:}
+    username: ${ROOT_USERNAME:admin}
+    password: ${ROOT_PASSWORD:admin123}
   upload-dir: ${UPLOAD_DIR:uploads}
   # Kunci penanda tanda tangan cookie sesi (opsional). Kosong = acak tiap aplikasi start.
   session-secret: ${SESSION_SECRET:}

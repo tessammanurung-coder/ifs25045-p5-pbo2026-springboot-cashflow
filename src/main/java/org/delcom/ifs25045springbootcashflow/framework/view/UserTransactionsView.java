@@ -69,7 +69,7 @@ public class UserTransactionsView extends VerticalLayout implements BeforeEnterO
 
         HorizontalLayout toolbar = new HorizontalLayout(picker, search, sort);
         toolbar.setAlignItems(FlexComponent.Alignment.END);
-        toolbar.setFlexWrap(true);
+        toolbar.getStyle().set("flex-wrap", "wrap");
         toolbar.addClassName("toolbar");
         Div notice = new Div(new Span("Mode baca saja: transaksi pengguna lain tidak dapat diubah atau dihapus."));
         notice.addClassName("readonly-notice");

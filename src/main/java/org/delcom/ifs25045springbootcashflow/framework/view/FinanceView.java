@@ -86,7 +86,7 @@ public class FinanceView extends VerticalLayout implements BeforeEnterObserver {
         HorizontalLayout toolbar = new HorizontalLayout(search, sort, reload, addIncome, addExpense);
         toolbar.setWidthFull();
         toolbar.setAlignItems(FlexComponent.Alignment.END);
-        toolbar.setFlexWrap(true);
+        toolbar.getStyle().set("flex-wrap", "wrap");
         toolbar.addClassName("toolbar");
 
         add(summary, toolbar, grid, empty);
