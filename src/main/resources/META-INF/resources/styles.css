@@ -1,0 +1,150 @@
+/* Cashflow - gaya global. Warna primer #2563EB, permukaan abu-abu #F3F4F6 (sesuai modul). */
+html {
+  --lumo-primary-color: #2563EB;
+  --lumo-primary-color-50pct: rgba(37, 99, 235, 0.5);
+  --lumo-primary-color-10pct: rgba(37, 99, 235, 0.1);
+  --lumo-primary-text-color: #2563EB;
+  --lumo-primary-contrast-color: #FFFFFF;
+  --cf-income: #15803D;
+  --cf-expense: #B91C1C;
+  --cf-surface: #F3F4F6;
+  --cf-ink: #0F172A;
+  --cf-muted: #64748B;
+}
+
+body { background: var(--cf-surface); }
+
+/* ---- Kursor: pointer untuk semua kontrol interaktif, default/not-allowed saat disabled ---- */
+vaadin-button,
+vaadin-menu-bar,
+vaadin-menu-bar-button,
+vaadin-menu-bar-item,
+vaadin-context-menu-item,
+vaadin-tab,
+vaadin-tabs::part(tabs),
+vaadin-drawer-toggle,
+vaadin-grid-sorter,
+vaadin-side-nav-item,
+vaadin-side-nav-item::part(link),
+vaadin-combo-box-item,
+vaadin-upload-file::part(remove-button),
+vaadin-avatar,
+a[href],
+.proof-thumb,
+.preview-image {
+  cursor: pointer;
+}
+vaadin-button[disabled],
+vaadin-menu-bar-button[disabled],
+vaadin-menu-bar-item[disabled],
+vaadin-context-menu-item[disabled],
+vaadin-tab[disabled],
+vaadin-drawer-toggle[disabled] {
+  cursor: not-allowed;
+}
+.preview-image { cursor: zoom-in; }
+
+/* ---- Dialog modal: header biru, footer abu-abu, tombol aksi di kanan ---- */
+vaadin-dialog-overlay::part(header) {
+  background: #2563EB;
+  color: #FFFFFF;
+  border-bottom: none;
+}
+vaadin-dialog-overlay::part(title) { color: #FFFFFF; }
+vaadin-dialog-overlay::part(footer) {
+  background: #F3F4F6;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  border-top: 1px solid #E5E7EB;
+}
+.dialog-close { color: #FFFFFF; --lumo-primary-text-color: #FFFFFF; }
+.dialog-close:hover { background: rgba(255, 255, 255, 0.15); }
+
+/* ---- Indikator loading global ---- */
+.v-loading-indicator {
+  height: 4px;
+  background: linear-gradient(90deg, #2563EB, #60A5FA);
+}
+
+/* ---- Tata letak ---- */
+.app-header { padding: 0 var(--lumo-space-m); }
+.app-title { font-size: 1.125rem; margin: 0; color: var(--cf-ink); }
+.drawer-brand { padding: var(--lumo-space-m); }
+.brand { font-weight: 700; font-size: 1.25rem; color: #2563EB; }
+.brand-icon { color: #2563EB; }
+.menu-user-text { display: flex; flex-direction: column; line-height: 1.2; text-align: left; }
+.menu-user-name { font-weight: 600; color: var(--cf-ink); }
+.menu-user-role { font-size: var(--lumo-font-size-xs); color: var(--cf-muted); }
+
+.auth-view { background: linear-gradient(160deg, #DBEAFE 0%, #F3F4F6 55%); }
+.auth-card { width: min(92vw, 24rem); }
+.auth-footer { text-align: center; margin-top: var(--lumo-space-m); color: var(--cf-muted); }
+
+.page-card {
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  padding: var(--lumo-space-l);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lumo-space-s);
+}
+.page-card-title { margin: 0; font-size: 1.375rem; color: var(--cf-ink); }
+.page-card-subtitle { margin: 0 0 var(--lumo-space-s); color: var(--cf-muted); }
+
+/* ---- Kartu ringkasan ---- */
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: var(--lumo-space-m);
+  width: 100%;
+}
+.summary-card {
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-left: 4px solid #2563EB;
+  border-radius: 10px;
+  padding: var(--lumo-space-m);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.summary-card.card-income { border-left-color: var(--cf-income); }
+.summary-card.card-expense { border-left-color: var(--cf-expense); }
+.summary-label { color: var(--cf-muted); font-size: var(--lumo-font-size-s); }
+.summary-value { font-size: 1.375rem; font-weight: 700; color: var(--cf-ink); font-variant-numeric: tabular-nums; }
+.card-income .summary-value { color: var(--cf-income); }
+.card-expense .summary-value { color: var(--cf-expense); }
+.card-balance .summary-value.negative { color: var(--cf-expense); }
+
+/* ---- Toolbar, grid, lencana ---- */
+.toolbar { background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 10px; padding: var(--lumo-space-s) var(--lumo-space-m); }
+.toolbar-search { flex: 1 1 14rem; }
+.cashflow-grid { background: #FFFFFF; border-radius: 10px; border: 1px solid #E5E7EB; }
+.money { font-weight: 600; font-variant-numeric: tabular-nums; }
+.money-income { color: var(--cf-income); }
+.money-expense { color: var(--cf-expense); }
+.badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: var(--lumo-font-size-xs); font-weight: 600; }
+.badge-income { background: #DCFCE7; color: #166534; }
+.badge-expense { background: #FEE2E2; color: #991B1B; }
+.badge-admin { background: #DBEAFE; color: #1E40AF; }
+.badge-user { background: #E5E7EB; color: #374151; }
+.proof-thumb { width: 40px; height: 40px; object-fit: cover; border-radius: 6px; border: 1px solid #E5E7EB; }
+.muted { color: var(--cf-muted); }
+.empty-state { text-align: center; padding: var(--lumo-space-xl); color: var(--cf-muted); background: #FFFFFF; border: 1px dashed #CBD5E1; border-radius: 10px; width: 100%; box-sizing: border-box; }
+.readonly-notice { background: #EFF6FF; color: #1E40AF; border: 1px solid #BFDBFE; border-radius: 8px; padding: var(--lumo-space-s) var(--lumo-space-m); width: 100%; box-sizing: border-box; }
+.profile-username { font-weight: 600; font-size: 1.125rem; }
+
+/* ---- Pratinjau gambar ---- */
+.preview-viewport { overflow: auto; max-height: 65vh; text-align: center; background: #F3F4F6; border-radius: 8px; }
+.preview-image { max-width: none; display: block; margin: 0 auto; transition: width 0.15s ease; }
+
+@media (max-width: 600px) {
+  .menu-user-text { display: none; }
+  .page-card { padding: var(--lumo-space-m); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .preview-image { transition: none; }
+}

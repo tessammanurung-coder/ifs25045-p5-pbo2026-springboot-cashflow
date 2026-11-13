@@ -1,0 +1,41 @@
+# Environment dan rahasia (.env.example tetap ter-track)
+.env
+!.env.example
+
+# Hasil build
+target/
+build/
+
+# Upload pengguna (folder dipertahankan lewat .gitkeep)
+uploads/*
+!uploads/.gitkeep
+
+# Database H2 lokal
+*.mv.db
+*.trace.db
+
+# Vaadin / frontend
+.vaadin/
+node_modules/
+node/
+frontend/generated/
+frontend/index.html
+package.json
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+vite.config.ts
+vite.generated.ts
+tsconfig.json
+types.d.ts
+.vaadin-node-tasks.lock
+
+# IDE / OS
+.idea/
+.vscode/
+.classpath
+.project
+.settings/
+*.iml
+.DS_Store
+Thumbs.db
