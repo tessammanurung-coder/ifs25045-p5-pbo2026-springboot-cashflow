@@ -47,9 +47,10 @@ Buka `http://localhost:<APP_PORT>` (default 8080).
 ## Pengujian
 ```bash
 ./mvnw clean test      # unit test + AppTest (profil "test", H2 in-memory)
-./mvnw clean verify    # + Jacoco: LINE coverage 100% (framework/** dan App dikecualikan)
+./mvnw clean verify    # + JaCoCo: instruction/branch/line/method/class coverage 100%
 ```
-Laporan Jacoco: `target/site/jacoco/index.html`.
+Laporan JaCoCo: `target/site/jacoco/index.html` (framework/view, framework/auth,
+adapter/repository, dan entry point `App` dikecualikan).
 
 ## Struktur
 ```

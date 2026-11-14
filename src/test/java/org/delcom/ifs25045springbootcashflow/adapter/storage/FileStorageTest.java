@@ -7,6 +7,7 @@ import org.delcom.ifs25045springbootcashflow.domain.exception.ValidationExceptio
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -70,6 +71,28 @@ class FileStorageTest {
     }
 
     @Test
+    void rejectsTruncatedAndMismatchedImageSignatures() {
+        Object[][] images = {
+                {"a.png", PNG, 8, new int[] {0, 1, 2, 3}},
+                {"a.jpg", JPG, 3, new int[] {0, 1, 2}},
+                {"a.gif", GIF, 6, new int[] {0, 1, 2, 3}},
+                {"a.webp", WEBP, 12, new int[] {0, 1, 2, 3, 8, 9, 10, 11}}
+        };
+        for (Object[] image : images) {
+            String fileName = (String) image[0];
+            byte[] signature = (byte[]) image[1];
+            int minimumLength = (int) image[2];
+            int[] signatureIndexes = (int[]) image[3];
+            assertRejected(fileName, Arrays.copyOf(signature, minimumLength - 1));
+            for (int index : signatureIndexes) {
+                byte[] invalidSignature = signature.clone();
+                invalidSignature[index] ^= 1;
+                assertRejected(fileName, invalidSignature);
+            }
+        }
+    }
+
+    @Test
     void deleteOnlyTouchesFilesInsideRoot() throws IOException {
         String path = storage.store("proof", "a.png", PNG);
         assertTrue(storage.delete(path));
@@ -77,6 +100,10 @@ class FileStorageTest {
         assertFalse(storage.exists(path));
         Path outside = Files.writeString(dir.resolve("secret.txt"), "x");
         assertFalse(storage.delete("/uploads/../../secret.txt"));
+        assertFalse(storage.delete("/uploads/.."));
+        assertFalse(storage.delete("/uploads/file..png"));
+        assertFalse(storage.delete("/uploads/."));
+        assertTrue(Files.isDirectory(storage.getRoot()));
         assertFalse(storage.delete("/uploads/a/b.png"));
         assertFalse(storage.delete("/uploads/a\\b.png"));
         assertFalse(storage.delete("/uploads/"));
@@ -106,5 +133,9 @@ class FileStorageTest {
         Files.delete(root);
         Files.writeString(root, "now a file");
         assertThrows(RepositoryException.class, () -> storage.store("p", "a.png", PNG));
+    }
+
+    private void assertRejected(String fileName, byte[] data) {
+        assertThrows(ValidationException.class, () -> storage.store("p", fileName, data));
     }
 }

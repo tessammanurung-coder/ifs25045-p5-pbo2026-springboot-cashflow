@@ -121,6 +121,7 @@
                                 <exclude>**/framework/view/**</exclude>
                                 <exclude>**/framework/auth/**</exclude>
                                 <exclude>**/adapter/repository/**</exclude>
+                                <exclude>**/App.class</exclude>
                             </excludes>
                         </configuration>
                     </execution>
@@ -135,6 +136,7 @@
                                 <exclude>**/framework/view/**</exclude>
                                 <exclude>**/framework/auth/**</exclude>
                                 <exclude>**/adapter/repository/**</exclude>
+                                <exclude>**/App.class</exclude>
                             </excludes>
                         </configuration>
                     </execution>
@@ -149,6 +151,7 @@
                                 <exclude>**/framework/view/**</exclude>
                                 <exclude>**/framework/auth/**</exclude>
                                 <exclude>**/adapter/repository/**</exclude>
+                                <exclude>**/App.class</exclude>
                             </excludes>
                             <rules>
                                 <rule>

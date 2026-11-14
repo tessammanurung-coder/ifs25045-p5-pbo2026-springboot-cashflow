@@ -18,7 +18,8 @@ class DotEnvTest {
     void parsesCommentsQuotesAndInvalidLines() {
         Map<String, String> v = DotEnv.parse(List.of(
                 "# komentar", "", "A=1", " B = dua ", "C=\"kutip ganda\"", "D='kutip tunggal'",
-                "E=", "=tanpa-kunci", "tanpa-sama", "F=a=b", "G=\""));
+                "E=", "=tanpa-kunci", "tanpa-sama", "F=a=b", "G=\"", "H=\"kutip belum ditutup",
+                "I='kutip belum ditutup"));
         assertEquals("1", v.get("A"));
         assertEquals("dua", v.get("B"));
         assertEquals("kutip ganda", v.get("C"));
@@ -26,7 +27,9 @@ class DotEnvTest {
         assertEquals("", v.get("E"));
         assertEquals("a=b", v.get("F"));
         assertEquals("\"", v.get("G"));
-        assertEquals(7, v.size());
+        assertEquals("\"kutip belum ditutup", v.get("H"));
+        assertEquals("'kutip belum ditutup", v.get("I"));
+        assertEquals(9, v.size());
     }
 
     @Test

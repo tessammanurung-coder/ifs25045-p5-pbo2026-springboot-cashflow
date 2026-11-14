@@ -35,7 +35,7 @@ pipeline {
         }
 
         // ============================================================
-        // BUILD & TEST (Maven + Jacoco 100%)
+        // BUILD & TEST (Maven + JaCoCo quality gate)
         // ============================================================
         stage('Build & Test') {
             agent {
@@ -61,7 +61,7 @@ pipeline {
                     fi
 
                     echo "=== Maven Clean Verify (Jacoco 100%) ==="
-                    # verify = test + jacoco:check (instruction/branch/line/method/class = 100%)
+                    # verify = tests + JaCoCo: instruction/branch/line/method/class = 100%
                     # -Pproduction = Vaadin frontend production build saat package
                     # cache Maven persisten agar tidak download ulang (hindari 429 Maven Central)
                     ./mvnw -B clean verify -Pproduction \

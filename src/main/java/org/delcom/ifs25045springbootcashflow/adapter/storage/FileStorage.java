@@ -83,11 +83,12 @@ public class FileStorage {
             return null;
         }
         String name = publicPath.substring(URL_PREFIX.length());
-        if (name.isEmpty() || name.contains("/") || name.contains("\\") || name.contains("..")) {
+        Path resolved = root.resolve(name).normalize();
+        if (!resolved.startsWith(root) || name.isEmpty() || name.equals(".") || name.contains("/")
+                || name.contains("\\") || name.contains("..")) {
             return null;
         }
-        Path resolved = root.resolve(name).normalize();
-        return resolved.startsWith(root) ? resolved : null;
+        return resolved;
     }
 
     private static String extensionOf(String fileName) {
