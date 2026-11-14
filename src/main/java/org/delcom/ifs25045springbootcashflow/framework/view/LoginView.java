@@ -35,6 +35,11 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
         this.auth = auth;
         this.session = session;
         addClassName("auth-view");
+        getElement().setAttribute("role", "main");
+        getElement().executeJs("""
+                document.documentElement.lang = $0;
+                document.querySelector('vaadin-connection-indicator')?.setAttribute('role', 'status');
+                """, "id");
         setSizeFull();
         setAlignItems(FlexComponent.Alignment.CENTER);
         setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
@@ -55,7 +60,8 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
         Div footer = new Div(hint, new RouterLink("Daftar", RegisterView.class));
         footer.addClassName("auth-footer");
 
-        PageCard card = new PageCard("Masuk ke Cashflow", "Catat pemasukan dan pengeluaran Anda.")
+        PageCard card = new PageCard("Masuk ke Cashflow", "Catat pemasukan dan pengeluaran Anda.",
+                PageCard.HeadingLevel.PAGE)
                 .with(username, password, progress, submit, footer);
         card.addClassName("auth-card");
         add(card);
